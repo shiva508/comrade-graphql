@@ -8,5 +8,4 @@ client:
   tcp: 127.0.0.1
   port: 8080
   route: graphql
-  base-url: http://localhost:8080/graphiql?path=/graphql
-# base-url: http://127.0.0.1:8080/graphiql
+  base-url: http://localhost:8080/graphql

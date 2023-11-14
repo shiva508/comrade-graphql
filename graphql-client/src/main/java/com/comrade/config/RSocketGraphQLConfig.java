@@ -29,7 +29,7 @@ public class RSocketGraphQLConfig {
 
     @Bean
     public HttpGraphQlClient httpGraphQlClient(){
-        WebClient webClient = WebClient.builder().baseUrl(baseUrl).build();
+        WebClient webClient = WebClient.create(baseUrl);
         return HttpGraphQlClient.builder(webClient).build();
     }
 }

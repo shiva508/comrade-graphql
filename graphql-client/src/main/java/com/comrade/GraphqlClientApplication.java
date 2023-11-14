@@ -1,12 +1,10 @@
 package com.comrade;
 
-import com.comrade.model.Comrade;
+import com.comrade.service.GraphQlService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.graphql.client.HttpGraphQlClient;
-import org.springframework.graphql.client.RSocketGraphQlClient;
 
 @SpringBootApplication
 public class GraphqlClientApplication {
@@ -15,17 +13,9 @@ public class GraphqlClientApplication {
         SpringApplication.run(GraphqlClientApplication.class, args);
     }
     @Bean
-    public ApplicationRunner applicationRunner(RSocketGraphQlClient rSocketGraphQlClient, HttpGraphQlClient httpGraphQlClient){
+    public ApplicationRunner applicationRunner(GraphQlService graphQlService){
         return args->{
-            var httpRequestDocument = """
-                     {
-                       comradeById(id:408){
-                         id
-                         name
-                       }
-                     }
-                    """;
-            httpGraphQlClient.document(httpRequestDocument).retrieve("comradeById").toEntity(Comrade.class).subscribe(System.out::println);
+            graphQlService.comradeById(408);
         };
     }
 }
