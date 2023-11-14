@@ -20,7 +20,8 @@
         <module>batch-request</module>
         <module>mutations</module>
 		<module>graphql-client</module>
-	</modules>
+        <module>streaming</module>
+    </modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

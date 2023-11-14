@@ -1,0 +1,7 @@
+type Query {
+    welcomeGreeting : Greeting
+}
+
+type Greeting{
+    greet: String
+}
