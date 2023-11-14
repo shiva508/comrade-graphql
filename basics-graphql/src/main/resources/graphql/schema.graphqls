@@ -1,0 +1,18 @@
+type Query {
+    bookById(id: ID): Book
+    findByCustomerId(id: ID): Customer
+    allCustomers: [Customer]
+}
+
+type Book {
+    id: ID
+    name: String
+    pageCount: Int
+    author: Author
+}
+
+type Author {
+    id: ID
+    firstName: String
+    lastName: String
+}
