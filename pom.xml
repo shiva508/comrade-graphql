@@ -21,6 +21,7 @@
         <module>mutations</module>
 		<module>graphql-client</module>
         <module>streaming</module>
+        <module>db-integration</module>
     </modules>
 	<properties>
 		<java.version>17</java.version>
