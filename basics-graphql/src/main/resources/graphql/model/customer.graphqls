@@ -3,6 +3,7 @@ type Customer {
     name: String
     profile: Profile
 }
+
 type Profile{
     id: ID
     customerId: ID

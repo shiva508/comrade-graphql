@@ -1,8 +1,10 @@
 package com.comrade.config;
 
+import com.comrade.model.Currency;
 import com.comrade.service.CustomerService;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
+import graphql.schema.idl.EnumValuesProvider;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.TypeRuntimeWiring;
 import org.springframework.context.annotation.Bean;
@@ -24,4 +26,5 @@ public class GraphQLCustomConfig {
             );
         };
     }
+
 }

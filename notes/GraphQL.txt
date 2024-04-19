@@ -46,3 +46,11 @@ query {
   id,name
 	}
 }
+
+<-------DGS-------->
+query{
+  shows {
+    title
+    releaseYear
+  }
+}

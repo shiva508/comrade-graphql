@@ -1,6 +1,4 @@
 enum Currency {
-    IND
-    USD
-    RUS
+    Rupee
 }
 

@@ -2,6 +2,7 @@ type Query {
     shows(titleFilter: String): [Show]
     dgsShows(releaseYear: Int): [Show]
     springShows(releaseYear: Int): [Show]
+    springAllShows: [Show]
 }
 
 type Show {

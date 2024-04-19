@@ -13,7 +13,8 @@ public class CustomerService {
     }
 
     public Customer findByCustomerId(Integer id){
-        return customersList().stream().filter(customer -> customer.id().equals(id)).findFirst().get();
+        return customersList().stream().filter(customer -> customer.id().equals(id)).findFirst()
+                .orElseThrow(()->new RuntimeException("Data Not"));
     }
 
     public Profile getProfileById(Customer customer){
