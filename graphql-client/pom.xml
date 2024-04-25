@@ -31,6 +31,16 @@
         </dependency>
 
         <dependency>
+            <groupId>com.netflix.graphql.dgs</groupId>
+            <artifactId>graphql-dgs-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.graphql.dgs.codegen</groupId>
+            <artifactId>graphql-dgs-codegen-shared-core</artifactId>
+            <version>6.1.6</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -46,17 +56,87 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.netflix.graphql.dgs</groupId>
+                <artifactId>graphql-dgs-platform-dependencies</artifactId>
+                <!-- The DGS BOM/platform dependency. This is the only place you set version of DGS -->
+                <version>8.4.0</version> <!-- Replace [LATEST_VERSION] with the [latest available version](https://mvnrepository.com/artifact/com.netflix.graphql.dgs/graphql-dgs-platform-dependencies) -->
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--                <configuration>-->
+                <!--                    <image>-->
+                <!--                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>-->
+                <!--                    </image>-->
+                <!--                </configuration>-->
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>io.github.deweyjose</groupId>-->
+<!--                <artifactId>graphqlcodegen-maven-plugin</artifactId>-->
+<!--                <version>1.18</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <schemaPaths>-->
+<!--                        <param>src/main/resources/schema/schema.graphqls</param>-->
+<!--                    </schemaPaths>-->
+<!--                    <packageName>${project.groupId}.graphql</packageName>-->
+<!--                    <generateClient>true</generateClient>-->
+<!--&lt;!&ndash;                    <subPackageNameClient>client</subPackageNameClient>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <outputDir>${project.build.directory}</outputDir>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+            <plugin>
+                <groupId>io.github.deweyjose</groupId>
+                <artifactId>graphqlcodegen-maven-plugin</artifactId>
+                <version>1.24</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <image>
-                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
-                    </image>
+                    <schemaPaths>
+                        <param>src/main/resources/schema/schema.graphqls</param>
+                    </schemaPaths>
+                    <generateClient>true</generateClient>
+                    <packageName>${project.groupId}</packageName>
+                    <addGeneratedAnnotation>true</addGeneratedAnnotation>
+                    <outputDir>${project.build.directory}/generated-sources</outputDir>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

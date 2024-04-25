@@ -17,7 +17,6 @@ public class DgsShowsDataFetcher {
         if(titleFilter == null) {
             return DgsUtil.shows;
         }
-
         return DgsUtil.shows.stream().filter(s -> s.title().contains(titleFilter)).collect(Collectors.toList());
     }
 
